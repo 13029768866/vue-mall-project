@@ -18,6 +18,22 @@
 安装：
 npm install fastclick -S
 引入（main.js）:
+import FastClick from 'fastclick'
+FastClick.attach(document.body)
+```
 
+# 2、首页功能思路
+
+1、路由切换图片和文字添加样式
+
+```
+1、通过&.router-link-active实现路由颜色切换
+2、通过$route.path和'/路由'对比切换图片
+<img :src="'/home' === $route.path?tabBarImgArr[0].selected:tabBarImgArr[0].normal" alt="">
+
+tabBarImgArr: [
+        {
+          normal: require('@/common/img/icon_home.png'), selected: require('@/common/img/icon_home_selected.png')
+        }]
 ```
 
