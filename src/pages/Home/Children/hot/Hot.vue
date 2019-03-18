@@ -14,7 +14,14 @@
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
       </div>
+      <!--热门导航-->
       <hot-nav></hot-nav>
+      <!--广告位-->
+      <div class="hot_ad">
+        <img src="./../../imgs/hot_ad/home_ad.gif" alt="">
+      </div>
+      <!--拼单商品列表-->
+      <hot-shop-list></hot-shop-list>
     </div>
 </template>
 
@@ -23,10 +30,12 @@ import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 
 import HotNav from './HotNav'
+import HotShopList from './HotShopList'
 export default {
   name: 'Hot',
   components: {
-    HotNav
+    HotNav,
+    HotShopList
   },
   mounted () {
     new Swiper ('.swiper-container', {
@@ -48,6 +57,12 @@ export default {
       padding-top: 46px
       background-color: #f5f5f5
       .swiper-slide
+        img
+          width: 100vw
+      .hot_ad
+        background-color: #fff
+        margin: 8px 0
+        padding: 5px
         img
           width: 100vw
 </style>

@@ -48,6 +48,10 @@ export default {
   background-color: #f5f5f5
   width: 100vw
   height: 120vh
+  overflow-x hidden
+  overflow-y scroll
+  &::-webkit-scrollbar
+    display: none
   .fix
     position: fixed
     top: 0

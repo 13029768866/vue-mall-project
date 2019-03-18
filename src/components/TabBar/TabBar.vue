@@ -69,6 +69,7 @@ export default {
 .index_tabBar
   display: flex
   position: fixed
+  background-color: #fff
   width: 100vw
   height: 50px
   left: 0
