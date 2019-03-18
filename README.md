@@ -29,7 +29,8 @@ FastClick.attach(document.body)
 ```
 1、通过&.router-link-active实现路由颜色切换
 2、通过$route.path和'/路由'对比切换图片
-<img :src="'/home' === $route.path?tabBarImgArr[0].selected:tabBarImgArr[0].normal" alt="">
+使用includes检测包含
+<img :src="$route.path.includes('/home')?tabBarImgArr[0].selected:tabBarImgArr[0].normal" alt="">
 
 tabBarImgArr: [
         {
@@ -37,7 +38,7 @@ tabBarImgArr: [
         }]
 ```
 
-2、首页头部可滑动tab
+2、首页头部可滑动tab--ly-tab
 
 ```
 安装：
@@ -45,5 +46,37 @@ npm i ly-tab -S
 使用：
 import LyTab from 'ly-tab'
 Vue.use(LyTab)
+
+1、配置2级路由，设置默认首页
+2、实现点击切换功能，lytab检测的事件是change，所以绑定用change事件
+3、设置个二级路由数组通过传过来的索引切换路径
+```
+
+3、首页轮播图swiper
+
+```
+安装：
+npm i swiper --save
+Html结构，引入js，css，创建实例传入配置项
+```
+
+4、热门导航HotNav
+
+​	1、隐藏水平滚动条：需要做兼容处理否则不生效  &::-webkit-scrollbar
+​	2、根据屏幕长度，热门导航区域长度，导航条容器长度，动态确定导航条填充容器的长度
+
+```
+data () {
+    return {
+      // 获取屏幕长度
+      screenWidth: document.documentElement.clientWidth || document.body.clientWidth,
+      // 滚动内容长度
+      scrollWidth: 720,
+      // 滚动条容器长度
+      scrollBox: 100,
+      // 滚动条内容长度
+      scrollContentWidth: 0
+    }
+  }
 ```
 

@@ -8,7 +8,7 @@ import Chat from './../pages/Chat/Chat'
 import Me from './../pages/Me/Me'
 
 // 首页二级路由引入
-import Hot from './../pages/Home/Children/Hot'
+import Hot from '../pages/Home/Children/hot/Hot'
 import Box from './../pages/Home/Children/Box'
 import Dress from './../pages/Home/Children/Dress'
 import Ele from './../pages/Home/Children/Ele'
@@ -30,6 +30,7 @@ export default new VueRouter({
       path: '/home',
       component: Home,
       children: [
+        { path: '/home', redirect: '/home/hot' },
         // 热门
         { path: 'hot', component: Hot },
         // 鞋包

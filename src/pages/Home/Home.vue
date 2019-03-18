@@ -4,6 +4,8 @@
               v-model="selectedId"
               :items="items"
               :options="options"
+              @change="handleChange"
+              class="fix"
       />
       <router-view></router-view>
     </div>
@@ -26,9 +28,16 @@ export default {
         { label: '男装' },
         { label: '电器' }
       ],
+      //  二级路由
+      secondRouteUrl: ['/home/hot', '/home/dress', '/home/box', '/home/mbaby', '/home/general', '/home/food', '/home/shirt', '/home/man', '/home/ele'],
       options: {
         activeColor: '#e9232c'
       }
+    }
+  },
+  methods: {
+    handleChange (item, idx) {
+      this.$router.replace(this.secondRouteUrl[idx])
     }
   }
 }
@@ -37,4 +46,11 @@ export default {
 <style scoped lang="stylus">
 .home
   background-color: #f5f5f5
+  width: 100vw
+  height: 120vh
+  .fix
+    position: fixed
+    top: 0
+    left: 0
+    z-index 998
 </style>

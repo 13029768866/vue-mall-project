@@ -4,35 +4,35 @@
                    to="/home"
                    tag="li"
       >
-        <img :src="'/home' === $route.path?tabBarImgArr[0].selected:tabBarImgArr[0].normal" alt="">
+        <img :src=" $route.path.includes('/home')?tabBarImgArr[0].selected:tabBarImgArr[0].normal" alt="">
         <span>首页</span>
       </router-link>
       <router-link class="tab-item"
                    to="/recommend"
                    tag="li"
       >
-        <img :src="'/recommend' === $route.path?tabBarImgArr[1].selected:tabBarImgArr[1].normal" alt="">
+        <img :src="$route.path.includes('/recommend' )?tabBarImgArr[1].selected:tabBarImgArr[1].normal" alt="">
         <span>推荐</span>
       </router-link>
       <router-link class="tab-item"
                    to="/search"
                    tag="li"
       >
-        <img :src="'/search' === $route.path?tabBarImgArr[2].selected:tabBarImgArr[2].normal" alt="">
+        <img :src="$route.path.includes('/search')?tabBarImgArr[2].selected:tabBarImgArr[2].normal" alt="">
         <span>搜索</span>
       </router-link>
       <router-link class="tab-item"
                    to="/chat"
                    tag="li"
       >
-        <img :src="'/chat' === $route.path?tabBarImgArr[3].selected:tabBarImgArr[3].normal" alt="">
+        <img :src="$route.path.includes('/chat')?tabBarImgArr[3].selected:tabBarImgArr[3].normal" alt="">
         <span>聊天</span>
       </router-link>
       <router-link class="tab-item"
                    to="/me"
                    tag="li"
       >
-        <img :src="'/me' === $route.path?tabBarImgArr[4].selected:tabBarImgArr[4].normal" alt="">
+        <img :src="$route.path.includes('/me')?tabBarImgArr[4].selected:tabBarImgArr[4].normal" alt="">
         <span>个人中心</span>
       </router-link>
     </ul>
