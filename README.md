@@ -62,21 +62,13 @@ Html结构，引入js，css，创建实例传入配置项
 
 4、热门导航HotNav
 
-​	1、隐藏水平滚动条：需要做兼容处理否则不生效  &::-webkit-scrollbar
-​	2、根据屏幕长度，热门导航区域长度，导航条容器长度，动态确定导航条填充容器的长度
+```
+1、隐藏水平滚动条：需要做兼容处理否则不生效  &::-webkit-scrollbar
+2、根据屏幕长度，热门导航区域长度，导航条容器长度，动态确定导航条填充容器的长度
+3、根据内容滚动距离，内容容器长度，滚动条容器长度，确定滚动条滚动距离
+```
 
-```
-data () {
-    return {
-      // 获取屏幕长度
-      screenWidth: document.documentElement.clientWidth || document.body.clientWidth,
-      // 滚动内容长度
-      scrollWidth: 720,
-      // 滚动条容器长度
-      scrollBox: 100,
-      // 滚动条内容长度
-      scrollContentWidth: 0
-    }
-  }
-```
+​	
+
+
 

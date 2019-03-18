@@ -129,10 +129,16 @@ let newVar = {
       let touch = event.touches[0]
       let contentMoveWidth = Number(touch.pageX) - this.startX
       // console.log(moveWidth)
-      this.scrollMoveWidth = -(contentMoveWidth / this.scrollWidth) * this.scrollBox
+      this.scrollMoveWidth = -((contentMoveWidth / this.scrollWidth) * this.scrollBox - this.endX)
+      // 边界限制
+      if (this.scrollMoveWidth < 0) {
+        this.scrollMoveWidth = 0
+      } else if (this.scrollMoveWidth > this.scrollBox - this.scrollContentWidth) {
+        this.scrollMoveWidth = this.scrollBox - this.scrollContentWidth
+      }
     },
     handleTouchEnd (event) {
-
+      this.endX = this.scrollMoveWidth
     }
   }
 }
