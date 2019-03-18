@@ -24,7 +24,7 @@ FastClick.attach(document.body)
 
 # 2、首页功能思路
 
-1、路由切换图片和文字添加样式
+1、底端路由切换图片和文字添加样式
 
 ```
 1、通过&.router-link-active实现路由颜色切换
@@ -35,5 +35,15 @@ tabBarImgArr: [
         {
           normal: require('@/common/img/icon_home.png'), selected: require('@/common/img/icon_home_selected.png')
         }]
+```
+
+2、首页头部可滑动tab
+
+```
+安装：
+npm i ly-tab -S
+使用：
+import LyTab from 'ly-tab'
+Vue.use(LyTab)
 ```
 
