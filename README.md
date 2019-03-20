@@ -71,5 +71,29 @@ Html结构，引入js，css，创建实例传入配置项
 
 # 3、数据库
 
+## 3.1MySql安装
 
+```
+https://www.jianshu.com/p/c89bace95cfa
+```
+
+## 3.2、服务器搭建
+
+```
+1、全局安装express
+npm install express-generator@4 -g
+2、设置视图模板
+express --view=ejs demo1
+3、安装依赖
+npm i
+4、启动服务
+set DEBUG=myapp & npm start
+```
+
+## 3.3、数据库和服务器链接
+
+```
+安装依赖
+npm i mysql -S
+```
 
