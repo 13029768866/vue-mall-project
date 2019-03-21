@@ -97,3 +97,10 @@ set DEBUG=myapp & npm start
 npm i mysql -S
 ```
 
+# 4、Vuex
+
+```
+1、vuex配置
+2、main引入，入口文件index
+```
+

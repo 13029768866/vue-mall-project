@@ -1,15 +1,14 @@
 <template>
     <div class="hot">
       <!--轮播图-->
-      <div class="swiper-container">
+      <div class="swiper-container" v-if="homecasual.length > 0">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="../../imgs/rowing/s1.png" alt=""></div>
-          <div class="swiper-slide"><img src="../../imgs/rowing/s2.png" alt=""></div>
-          <div class="swiper-slide"><img src="../../imgs/rowing/s3.png" alt=""></div>
-          <div class="swiper-slide"><img src="../../imgs/rowing/s4.png" alt=""></div>
-          <div class="swiper-slide"><img src="../../imgs/rowing/s5.png" alt=""></div>
-          <div class="swiper-slide"><img src="../../imgs/rowing/s6.png" alt=""></div>
-          <div class="swiper-slide"><img src="../../imgs/rowing/s7.png" alt=""></div>
+          <div class="swiper-slide"
+               v-for="(item, idx) in homecasual"
+               :key = 'idx'
+          >
+            <img :src="item.imgurl" alt="">
+          </div>
         </div>
         <!-- 如果需要分页器 -->
         <div class="swiper-pagination"></div>
@@ -31,21 +30,36 @@ import 'swiper/dist/css/swiper.min.css'
 
 import HotNav from './HotNav'
 import HotShopList from './HotShopList'
+
+import  { mapState } from 'vuex'
 export default {
   name: 'Hot',
   components: {
     HotNav,
     HotShopList
   },
+  computed:{
+    ...mapState(['homecasual'])
+  },
+  watch:{
+    homecasual(){
+      this.$nextTick(() => {
+        // 创建swiper实例
+        new Swiper ('.swiper-container', {
+          autoplay: true,
+          loop: true, // 循环模式选项
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        })
+      })
+    }
+  },
   mounted () {
-    new Swiper ('.swiper-container', {
-      autoplay: true,
-      loop: true, // 循环模式选项
-      // 如果需要分页器
-      pagination: {
-        el: '.swiper-pagination'
-      }
-    })
+    // 1、获取轮播图数据
+    this.$store.dispatch('reqHomeCasual')
+
   }
 }
 </script>

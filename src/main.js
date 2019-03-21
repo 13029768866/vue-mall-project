@@ -3,7 +3,8 @@ import App from './App'
 import router from './router/router'
 import FastClick from 'fastclick'
 import LyTab from 'ly-tab'
-import store from './store/index'
+import store from './store/index' // 引入vuex
+
 
 FastClick.attach(document.body)
 Vue.use(LyTab)
