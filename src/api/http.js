@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default function ajax(url = '', params = {}, type = 'GET') {
+export default function http(url = '', params = {}, type = 'GET') {
   // 1. 定义promise对象
   let promise;
   return new Promise((resolve, reject)=>{

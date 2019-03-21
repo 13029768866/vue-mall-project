@@ -99,8 +99,26 @@ npm i mysql -S
 
 # 4、Vuex
 
-```
-1、vuex配置
-2、main引入，入口文件index
-```
+## 4.1、目录结构
 
+![](./READMEIMG/store目录结构.png)
+
+## 4.2、入口函数index配置
+
+![](./READMEIMG/vuex入口函数index配置.png)
+
+## 4.3、api中统一配置接口路径
+
+![](./READMEIMG/api中统一配置接口获取数据.png)
+
+## 4.4、mutations-type配置统一常量
+
+![](./READMEIMG/mutations-type配置常量.png)
+
+## 4.5、actions到mutations
+
+![](./READMEIMG/actions到mutations.png)
+
+## 4.6、mutations到state
+
+![](./READMEIMG/mutations到state.png)
