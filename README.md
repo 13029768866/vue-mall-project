@@ -24,7 +24,7 @@ FastClick.attach(document.body)
 
 # 2、首页功能思路
 
-1、底端路由切换图片和文字添加样式
+## 2.1、底端路由切换图片和文字添加样式
 
 ```
 1、通过&.router-link-active实现路由颜色切换
@@ -38,7 +38,7 @@ tabBarImgArr: [
         }]
 ```
 
-2、首页头部可滑动tab--ly-tab
+## 2.2、首页头部可滑动tab--ly-tab
 
 ```
 安装：
@@ -52,7 +52,7 @@ Vue.use(LyTab)
 3、设置个二级路由数组通过传过来的索引切换路径
 ```
 
-3、首页轮播图swiper
+## 2.3、首页轮播图swiper
 
 ```
 安装：
@@ -60,7 +60,41 @@ npm i swiper --save
 Html结构，引入js，css，创建实例传入配置项
 ```
 
-4、热门导航HotNav
+```
+mounted（）{
+ 获取数据
+ this.$store.dispatch('reqHomeCasual') actions里设置的方法
+}
+
+把数据存入state库里
+import { mapState } from 'vuex'
+computed: {
+    ...mapState(['homecasual'])  state设置的接收数组
+}
+
+1、根据homecasual.length > 0判断是否显示轮播图
+2、通过watch属性监听，获取属性后再进行swiper实例化
+异步执行，$nextTick
+  watch:{
+    homecasual(){
+      this.$nextTick(() => {
+        // 创建swiper实例
+        new Swiper ('.swiper-container', {
+          autoplay: true,
+          loop: true, // 循环模式选项
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        })
+      })
+    }
+  }
+```
+
+
+
+## 2.4、热门导航HotNav
 
 ```
 1、隐藏水平滚动条：需要做兼容处理否则不生效  &::-webkit-scrollbar

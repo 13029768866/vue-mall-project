@@ -38,7 +38,15 @@ export default {
     HotNav,
     HotShopList
   },
-  computed:{
+  mounted () {
+    // 1、获取轮播图数据
+    this.$store.dispatch('reqHomeCasual')
+    // 2、获取首页热门导航数据
+    this.$store.dispatch('reqHomeNav')
+    //  3、获取商品列表数据
+    this.$store.dispatch('reqShopList')
+  },
+  computed: {
     ...mapState(['homecasual'])
   },
   watch:{
@@ -55,11 +63,6 @@ export default {
         })
       })
     }
-  },
-  mounted () {
-    // 1、获取轮播图数据
-    this.$store.dispatch('reqHomeCasual')
-
   }
 }
 </script>

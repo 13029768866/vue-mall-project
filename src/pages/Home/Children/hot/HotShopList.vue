@@ -1,49 +1,20 @@
 <template>
     <div class="shop_container">
-      <ul class="shop_list">
-        <li class="shop_list_item">
-          <img src="./../../imgs/shop_list/shop_item.png" alt="" width="100vw">
-          <h4 class="list_item_title">wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼</h4>
+      <ul class="shop_list" v-if="homeshoplist.length > 0">
+        <li class="shop_list_item"
+            v-for="(item,idx) in homeshoplist"
+            :key = 'idx'
+        >
+          <img :src="item.image_url" alt="" width="100vw">
+          <h4 class="list_item_title">{{item.goods_name}}</h4>
           <div class="list_item_bottom">
-            <span class="item_price">￥26.9</span>
-            <span class="item_counter">已拼8888件</span>
-            <span class="item_user">
-              <img src="./../../imgs/shop_list/user1.jpg" alt="">
-              <img src="./../../imgs/shop_list/user2.jpg" alt="">
-            </span>
-            <span class="item_buy">
-              <button>
-                去拼单 >
-              </button>
-            </span>
-          </div>
-        </li>
-        <li class="shop_list_item">
-          <img src="./../../imgs/shop_list/shop_item.png" alt="" width="100vw">
-          <h4 class="list_item_title">wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼</h4>
-          <div class="list_item_bottom">
-            <span class="item_price">￥26.9</span>
-            <span class="item_counter">已拼8888件</span>
-            <span class="item_user">
-              <img src="./../../imgs/shop_list/user1.jpg" alt="">
-              <img src="./../../imgs/shop_list/user2.jpg" alt="">
-            </span>
-            <span class="item_buy">
-              <button>
-                去拼单 >
-              </button>
-            </span>
-          </div>
-        </li>
-        <li class="shop_list_item">
-          <img src="./../../imgs/shop_list/shop_item.png" alt="" width="100vw">
-          <h4 class="list_item_title">wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼wzj牛逼</h4>
-          <div class="list_item_bottom">
-            <span class="item_price">￥26.9</span>
-            <span class="item_counter">已拼8888件</span>
-            <span class="item_user">
-              <img src="./../../imgs/shop_list/user1.jpg" alt="">
-              <img src="./../../imgs/shop_list/user2.jpg" alt="">
+            <span class="item_price">￥{{item.normal_price / 100}}</span>
+            <span class="item_counter">{{item.sales_tip}}</span>
+            <span class="item_user"
+                  v-for="(item1,idx1) in item.bubble"
+                  :key = 'idx1'
+            >
+              <img :src="item1.avatar" alt="">
             </span>
             <span class="item_buy">
               <button>
@@ -57,8 +28,15 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
 export default {
-  name: 'HotShopList'
+  name: 'HotShopList',
+  mounted() {
+
+  },
+  computed: {
+    ...mapState(['homeshoplist'])
+  }
 }
 </script>
 
@@ -76,6 +54,7 @@ export default {
         height: 44px
         line-height:22px
         width: 94vw
+        height: 20px
         margin-left: 3vw
         overflow hidden
         text-overflow ellipsis
@@ -97,13 +76,14 @@ export default {
           font-size: 12px
           color #ccc
         .item_user
-          flex 1
+          /*flex 1*/
           display: flex
+          justify-content: center
           align-items: center
           img
             width: 30px
             border-radius 50%
-          img:nth-child(2)
+          img:last-child
             margin-left: -8px
         .item_buy
           flex 2
