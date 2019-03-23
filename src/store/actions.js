@@ -3,7 +3,8 @@ import {
   getHomeCasual,
   getHomeNav,
   getHomeShopList,
-  getRecommend
+  getRecommend,
+  getSearchGoods
 } from '../api'
 
 //  引入mutations-types常量
@@ -11,7 +12,8 @@ import {
   HOME_CASUAL,
   HOME_NAV,
   HOME_SHOP_LIST,
-  Recommend
+  RECOMMEND,
+  SEARCH_GOODS
 } from './mutation-types'
 
 export default {
@@ -34,6 +36,12 @@ export default {
 // 推荐页面
   async reqRecommend({commit}){
     const res = await getRecommend()
-    commit(Recommend, {recommend:res.message.data})
+    commit(RECOMMEND, {recommend:res.message.data})
+  },
+  // 搜索页面数据
+  async reqSearchGoods({commit}){
+    const res = await getSearchGoods();
+    commit(SEARCH_GOODS,{searchgoods: res.message.data})
   }
+
 }

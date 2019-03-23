@@ -3,7 +3,8 @@ import {
   HOME_CASUAL,
   HOME_NAV,
   HOME_SHOP_LIST,
-  Recommend
+  RECOMMEND,
+  SEARCH_GOODS
 } from './mutation-types'
 
 // 根据常量提交到state
@@ -17,7 +18,10 @@ export default {
   [HOME_SHOP_LIST](state,{homeshoplist}){
     state.homeshoplist = homeshoplist
   },
-  [Recommend](state,{recommend}){
+  [RECOMMEND](state,{recommend}){
     state.recommend = recommend
+  },
+  [SEARCH_GOODS](state,{searchgoods}){
+    state.searchgoods = searchgoods
   }
 }

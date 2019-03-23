@@ -156,3 +156,113 @@ npm i mysql -S
 ## 4.6、mutations到state
 
 ![](./READMEIMG/mutations到state.png)
+
+# 5、搜索页功能思路
+
+## 5.1、滚动功能实现
+
+```
+1、安装better-scroll
+npm i better-scroll -S
+```
+
+## 5.2、给左右区域设置滚动功能
+
+```
+ // 1、初始化滚动区域
+    initBetterScroll(){
+      // 左侧
+       this.leftScroll = new BScroll('.shop_menu',{})
+       // 右侧
+       this.rightScroll = new BScroll('.shop_menu_show',{})
+    }
+    
+ // 深度监视，确定数据加载完成再开始初始化 
+   watch: {
+    searchgoods(){
+      this.$nextTick(()=>{
+        this.initBetterScroll()
+      })
+    }
+  }
+```
+
+## 5.3、实现右侧滚动，左侧区域切换功能
+
+1、监听右侧滚动事件获取scrollY,**注意想要监听滚动事件，BScroll实例化时probeType：3**
+
+```
+ this.rightScroll.on('scroll',(pos)=>{
+        this.scrollY = Math.abs(pos.y)
+        console.log(this.scrollY);
+    })
+```
+
+2、获取右侧区域标题在页面中的位置rightLiTops
+
+```
+getRightLiTops(){
+    let top = 0
+    this.rightLiTops.push(top);
+    let liArr =[...this.$refs.shopsList.getElementsByClassName('show_item')]
+    // console.log(liArr);
+    liArr.forEach(li=>{
+    top += li.clientHeight
+    this.rightLiTops.push(top)
+    })
+    console.log(this.rightLiTops);
+}
+```
+
+3、通过scrollY对比rightLiTops用findIndex获取索引，通过索引值对比给左侧导航添加样式
+
+```
+  <li
+      v-for="(item, idx) in searchgoods"
+      :key = 'idx'
+      class="menu_item"
+      ref="menulist"
+      :class="{current: currentIndex === idx}"
+  >
+ 
+ computed: {
+    ...mapState(['searchgoods']),
+    currentIndex(){
+      const {scrollY, rightLiTops} = this
+      return rightLiTops.findIndex((item, index)=>{
+        return scrollY >= item && scrollY <= rightLiTops[index + 1]
+      })
+    }
+  }
+```
+
+4、通过左侧点击传入索引值，右侧直接跳到相应位置
+
+```
+// 3、左侧点击右侧跳转
+    clickLeftItem(idx){
+      this.scrollY = this.rightLiTops[idx]
+      this.rightScroll.scrollTo(0,-this.scrollY,300)
+    }
+```
+
+5、通过右侧计算属性获取索引，左侧添加跳转
+
+```
+leftMenuScroll(idx){
+      let curEl = this.$refs.menulist[idx]
+      this.leftScroll.scrollToElement(curEl,300,0,true)
+    }
+```
+
+
+
+## 5.2、bug解决
+
+```
+1、打印new BScroll(".shop_menu",{})
+2、查看hasVerticalScroll是否为true
+3、检查scrollerHeight 和 wrapperHeight大小
+4、检查页面wrapper里面是否有多个同级div
+```
+
