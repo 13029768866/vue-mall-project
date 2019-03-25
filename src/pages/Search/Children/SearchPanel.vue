@@ -69,6 +69,7 @@
           height 100%
           padding-left 10px
           color #aaa
+          border: 0
           font-size 16px
           outline none
       cancel_btn

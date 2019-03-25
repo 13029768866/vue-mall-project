@@ -19,7 +19,7 @@ export default {
     state.homeshoplist = homeshoplist
   },
   [RECOMMEND](state,{recommend}){
-    state.recommend = recommend
+    state.recommend = state.recommend.concat(recommend)
   },
   [SEARCH_GOODS](state,{searchgoods}){
     state.searchgoods = searchgoods

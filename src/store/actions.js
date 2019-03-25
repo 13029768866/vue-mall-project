@@ -34,9 +34,11 @@ export default {
     commit(HOME_SHOP_LIST,{homeshoplist: res.message.goods_list})
 },
 // 推荐页面
-  async reqRecommend({commit}){
-    const res = await getRecommend()
+  async reqRecommend({commit},params){
+    console.log(params);
+    const res = await getRecommend(params)
     commit(RECOMMEND, {recommend:res.message.data})
+    params.callback && params.callback()
   },
   // 搜索页面数据
   async reqSearchGoods({commit}){

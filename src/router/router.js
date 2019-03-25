@@ -6,6 +6,8 @@ import Recommend from './../pages/Recommend/Recommend'
 import Search from './../pages/Search/Search'
 import Chat from './../pages/Chat/Chat'
 import Me from './../pages/Me/Me'
+import Register from './../pages/Login/Register'
+
 
 // 首页二级路由引入
 import Hot from '../pages/Home/Children/hot/Hot'
@@ -30,9 +32,9 @@ export default new VueRouter({
       path: '/home',
       component: Home,
       children: [
-        { path: '/home', redirect: '/home/hot' },
+        { path: '/home', redirect: '/home/hot'},
         // 热门
-        { path: 'hot', component: Hot },
+        { path: 'hot', component: Hot ,meta:{showBottomTab:true} },
         // 鞋包
         { path: 'box', component: Box },
         // 服饰
@@ -49,23 +51,37 @@ export default new VueRouter({
         { path: 'shirt', component: Shirt },
         // 男装
         { path: 'man', component: Man }
-      ]
+      ],
+
     },
     {
       path: '/recommend',
-      component: Recommend
+      component: Recommend,
+      meta:{showBottomTab:true}
+
     },
     {
       path: '/search',
-      component: Search
+      component: Search,
+      meta:{showBottomTab:true}
+
     },
     {
       path: '/chat',
-      component: Chat
+      component: Chat,
+      meta:{showBottomTab:true}
+
     },
     {
       path: '/me',
-      component: Me
+      component: Me,
+      meta:{showBottomTab:true}
+
+    },
+    // 注册
+    {
+      path: '/login',
+      component: Register
     }
   ]
 })
