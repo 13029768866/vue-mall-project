@@ -4,7 +4,8 @@ import {
   HOME_NAV,
   HOME_SHOP_LIST,
   RECOMMEND,
-  SEARCH_GOODS
+  SEARCH_GOODS,
+  USER_INFO
 } from './mutation-types'
 
 // 根据常量提交到state
@@ -23,5 +24,8 @@ export default {
   },
   [SEARCH_GOODS](state,{searchgoods}){
     state.searchgoods = searchgoods
+  },
+  [USER_INFO](state,{userInfo}){
+    state.userInfo = userInfo
   }
 }

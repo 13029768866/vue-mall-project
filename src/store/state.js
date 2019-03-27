@@ -3,5 +3,6 @@ export default {
   homenav: [], //  首页热门导航
   homeshoplist: [], //  首页商品列表
   recommend: [], //  推荐页列表
-  searchgoods: [] //  搜索页数据
+  searchgoods: [], //  搜索页数据
+  userInfo: {} // 用户数据信息
 }

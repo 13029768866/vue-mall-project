@@ -45,7 +45,7 @@
                   {{count}}秒</button>
               </section>
               <section class="login-verification">
-                <input type="tel" maxlength="8" placeholder="验证码">
+                <input type="tel" maxlength="8" placeholder="验证码" v-model="code">
               </section>
               <section class="login-hint">
                 温馨提示：未注册撩课帐号的手机号，登录时将自动注册，且代表已同意
@@ -56,7 +56,7 @@
             <div :class="{current: !loginIsShow}">
               <section>
                 <section class="login-message">
-                  <input type="tel" maxlength="11" placeholder="用户名/手机/邮箱">
+                  <input type="tel" maxlength="11" placeholder="用户名/手机/邮箱" v-model="user_name">
                 </section>
                 <section class="login-verification">
                   <input type="password" maxlength="8" placeholder="密码" v-if="pwdShow" v-model="pwd">
@@ -67,7 +67,7 @@
                   </div>
                 </section>
                 <section class="login-message">
-                  <input  class="login_wzj" type="text" maxlength="11" placeholder="验证码">
+                  <input  class="login_wzj" type="text" maxlength="11" placeholder="验证码" v-model="capthe">
                   <img
                     ref="verifyImg"
                     class="get_verification"
@@ -77,7 +77,10 @@
                 </section>
               </section>
             </div>
-            <button class="login-submit">登录</button>
+            <button
+              class="login-submit"
+              @click.prevent="login()"
+            >登录</button>
           </form>
           <button class="login-back" @click="$router.back()">返回</button>
         </div>
@@ -86,8 +89,10 @@
   </template>
 
 <script>
-  import { getPhoneCode } from '@/api/index'
+  import { getPhoneCode,codeLogin,pwdLogin } from '@/api/index'
   import {Toast} from 'mint-ui'
+  import {mapActions} from 'vuex'
+
     export default {
         name: "Register",
         data(){
@@ -96,7 +101,11 @@
             phone:'',// 手机号码
             count: 0,// 倒计时
             pwd:'',
-            pwdShow: true // 密码显示方式true为密文
+            code:'', // 验证码
+            pwdShow: true, // 密码显示方式true为密文
+            userInfo: {}, // 用户信息
+            user_name:'', // 用户名
+            capthe:'' // 图形验证码
           }
         },
         computed:{
@@ -107,6 +116,7 @@
 
         },
         methods:{
+          ...mapActions(['syncUserInfo']),
           toggleLogin(flag){
             this.loginIsShow = flag;
           },
@@ -114,7 +124,7 @@
           async getVerifyCode(){
             console.log(1);
             if(this.phoneIsRight){
-              this.count = 5
+              this.count = 10
               this.timer = setInterval(()=>{
                 this.count--
                 if(this.count === 0){
@@ -140,6 +150,66 @@
           // 改变验证码
           changeVerify(){
             this.$refs.verifyImg.src ='http://127.0.0.1:3000/api/captcha?time=' + new Date()
+          },
+          // 登录
+          async login() {
+            //  1.判断登录模式
+            if (this.loginIsShow) { //短信登录
+              if (!this.phone) {
+                Toast('请输入手机号码')
+                return
+              } else if (!this.phoneIsRight) {
+                Toast('请输入正确手机号码')
+                return
+              }
+
+              if (!this.code) {
+                Toast('请输入验证码')
+                return
+              } else if (!/^\d{6}$/gi.test(this.code)) {
+                Toast('请输入正确验证码')
+                return
+              }
+
+              // 验证登录
+              const result = await codeLogin(this.phone, this.code)
+              console.log(result);
+              if(result.success_code === 200){
+                this.userInfo = result.message
+              }else{
+                this.userInfo = {
+                  message: '登录失败，手机号或者验证码不正确！'
+                }
+              }
+            } else { // 账号密码登录
+              if (!this.user_name) {
+                Toast('请输入用户名/手机/邮箱')
+                return
+              } else if (!this.pwd) {
+                Toast('请输入密码')
+                return
+              }else if(!this.capthe){
+                Toast('请输入验证码')
+                return
+              }
+              // 用户名和密码登录
+              const result1 = await pwdLogin(this.user_name, this.pwd, this.capthe)
+              console.log(1);
+              console.log(result1);
+              if(result1.success_code === 200){
+                this.userInfo =result1.message
+              }else{
+                this.userInfo = {
+                  message: '登录失败，手机号或验证码不正确！'
+                }
+              }
+            }
+            if(!this.userInfo.id){
+              Toast(this.userInfo.message)
+            }else {
+              this.syncUserInfo(this.userInfo);
+              this.$router.back()
+            }
           }
         }
     }

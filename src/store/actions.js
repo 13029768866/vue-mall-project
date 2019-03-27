@@ -13,7 +13,8 @@ import {
   HOME_NAV,
   HOME_SHOP_LIST,
   RECOMMEND,
-  SEARCH_GOODS
+  SEARCH_GOODS,
+  USER_INFO
 } from './mutation-types'
 
 export default {
@@ -44,6 +45,9 @@ export default {
   async reqSearchGoods({commit}){
     const res = await getSearchGoods();
     commit(SEARCH_GOODS,{searchgoods: res.message.data})
+  },
+  // 同步用户信息
+  syncUserInfo({commit},userInfo){
+    commit(USER_INFO,{userInfo})
   }
-
 }
