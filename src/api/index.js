@@ -11,4 +11,6 @@ export const getRecommend = () => http(BASE_URL + '/api/recommend')   // 获取�
 export const getSearchGoods = () => http(BASE_URL + '/api/searchgoods')   // 获取搜索数据
 export const getPhoneCode = (phone) => http(BASE_URL + '/api/send_code',{phone})   // 获取电话数据数据
 export const codeLogin = (phone,code) => http(BASE_URL + '/api/login_code',{phone,code},'POST')   // 手机验证码登录
-export const pwdLogin = (user_name,pwd,capthe) => http(BASE_URL + '/api/login_pwd',{user_name,pwd,capthe},'POST')   // 用户名密码登录
+export const pwdLogin = (user_name,pwd,captcha) => http(BASE_URL + '/api/login_pwd',{user_name,pwd,captcha},'POST')   // 用户名密码登录
+export const getUserInfo = () => http(BASE_URL + '/api/user_info')   // 获取用户状态
+export const getLogout = () => http(BASE_URL + '/api/logout'); //退出登录

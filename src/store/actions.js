@@ -4,7 +4,9 @@ import {
   getHomeNav,
   getHomeShopList,
   getRecommend,
-  getSearchGoods
+  getSearchGoods,
+  getUserInfo,
+  getLogout
 } from '../api'
 
 //  引入mutations-types常量
@@ -14,7 +16,8 @@ import {
   HOME_SHOP_LIST,
   RECOMMEND,
   SEARCH_GOODS,
-  USER_INFO
+  USER_INFO,
+  RESET_USER_INFO
 } from './mutation-types'
 
 export default {
@@ -49,5 +52,22 @@ export default {
   // 同步用户信息
   syncUserInfo({commit},userInfo){
     commit(USER_INFO,{userInfo})
+  },
+  // 异步检查用户信息
+  async checkUserInfo({commit}){
+    const res = await getUserInfo();
+    console.log(res);
+    if(res.success_code = 200){
+      commit(USER_INFO,{userInfo: res.message})
+    }
+  },
+  // 8. 退出登录
+  async logOut({commit}){
+    const result = await getLogout();
+    console.log(result);
+    if(result.success_code === 200){
+      commit(RESET_USER_INFO);
+    }
   }
+
 }

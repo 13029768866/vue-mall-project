@@ -1,20 +1,21 @@
 <template>
-    <div class="me">个人中心
+    <div class="me">
+      <me-top v-if="userInfo.id">
 
-      <div v-if="userInfo.id">
-        主面板
-      </div>
+      </me-top>
       <login v-else></login>
     </div>
 </template>
 
 <script>
   import Login from '../Login/Login'
+  import MeTop from './MeTop'
   import {mapState} from 'vuex'
 export default {
   name: 'Me',
   components:{
-    Login
+    Login,
+    MeTop
   },
   computed:{
     ...mapState(['userInfo'])

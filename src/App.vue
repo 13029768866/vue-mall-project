@@ -9,7 +9,10 @@
 import TabBar from './components/TabBar/TabBar'
 export default {
   name: 'App',
-  components: { TabBar }
+  components: { TabBar },
+  created() {
+    this.$store.dispatch('checkUserInfo')
+  }
 }
 </script>
 

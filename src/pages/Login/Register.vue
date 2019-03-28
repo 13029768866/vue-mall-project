@@ -67,11 +67,11 @@
                   </div>
                 </section>
                 <section class="login-message">
-                  <input  class="login_wzj" type="text" maxlength="11" placeholder="验证码" v-model="capthe">
+                  <input  class="login_wzj" type="text" maxlength="11" placeholder="验证码" v-model="captcha">
                   <img
                     ref="verifyImg"
                     class="get_verification"
-                    src="http://127.0.0.1:3000/api/captcha"
+                    src="http://localhost:3000/api/captcha"
                     @click.prevent = 'changeVerify()'
                     alt="captcha">
                 </section>
@@ -105,7 +105,7 @@
             pwdShow: true, // 密码显示方式true为密文
             userInfo: {}, // 用户信息
             user_name:'', // 用户名
-            capthe:'' // 图形验证码
+            captcha:'' // 图形验证码
           }
         },
         computed:{
@@ -149,7 +149,7 @@
           },
           // 改变验证码
           changeVerify(){
-            this.$refs.verifyImg.src ='http://127.0.0.1:3000/api/captcha?time=' + new Date()
+            this.$refs.verifyImg.src ='http://localhost:3000/api/captcha?time=' + new Date()
           },
           // 登录
           async login() {
@@ -188,16 +188,16 @@
               } else if (!this.pwd) {
                 Toast('请输入密码')
                 return
-              }else if(!this.capthe){
+              }else if(!this.captcha){
                 Toast('请输入验证码')
                 return
               }
               // 用户名和密码登录
-              const result1 = await pwdLogin(this.user_name, this.pwd, this.capthe)
-              console.log(1);
-              console.log(result1);
-              if(result1.success_code === 200){
-                this.userInfo =result1.message
+
+              const result = await pwdLogin(this.user_name, this.pwd, this.captcha)
+              console.log(result);
+              if(result.success_code === 200){
+                this.userInfo =result.message
               }else{
                 this.userInfo = {
                   message: '登录失败，手机号或验证码不正确！'

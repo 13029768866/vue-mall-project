@@ -5,7 +5,8 @@ import {
   HOME_SHOP_LIST,
   RECOMMEND,
   SEARCH_GOODS,
-  USER_INFO
+  USER_INFO,
+  RESET_USER_INFO
 } from './mutation-types'
 
 // 根据常量提交到state
@@ -27,5 +28,8 @@ export default {
   },
   [USER_INFO](state,{userInfo}){
     state.userInfo = userInfo
-  }
+  },
+  [RESET_USER_INFO](state) {
+    state.userInfo = {};
+  },
 }
