@@ -1,7 +1,7 @@
 import http from './http'
 
 // 1、基础路径
-const BASE_URL = 'http://154.83.12.64:3000'
+const BASE_URL = 'http://127.0.0.1:3000'
 
 //2、请求方法
 export const getHomeCasual = () => http(BASE_URL + '/api/homecasual'); // 首页轮播图数据
@@ -14,3 +14,5 @@ export const codeLogin = (phone,code) => http(BASE_URL + '/api/login_code',{phon
 export const pwdLogin = (user_name,pwd,captcha) => http(BASE_URL + '/api/login_pwd',{user_name,pwd,captcha},'POST')   // 用户名密码登录
 export const getUserInfo = () => http(BASE_URL + '/api/user_info')   // 获取用户状态
 export const getLogout = () => http(BASE_URL + '/api/logout'); //退出登录
+export const addGoodsToCart = (user_id, goods_id, goods_name, thumb_url, price) => ajax(BASE_URL + '/api/add_shop_cart', {user_id, goods_id, goods_name, thumb_url, price}, 'POST'); //添加购物车
+

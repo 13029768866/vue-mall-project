@@ -6,6 +6,7 @@
           v-for = '(item,idx) in recommend'
           :item = 'item'
           :key = 'idx'
+          :clickCellBtn="dealWithCellBtnClick"
         ></shop-list>
       </ul>
     </div>
@@ -15,6 +16,7 @@
   import { mapState } from 'vuex'
   import BScroll from 'better-scroll'
   import { Indicator } from 'mint-ui';
+  import { addGoodsToCart } from '@/api/index';
   import ShopList from '@/components/ShopList/ShopList'
 export default {
   name: 'Recommend',
@@ -58,8 +60,14 @@ export default {
         this.listScroll.on('scrollEnd',()=>{
           this.listScroll.refresh()
         })
-      }
-
+      },
+      // 商品点击
+    async dealWithCellBtnClick(goods){
+      // 1. 发送请求
+      // user_id, goods_id, goods_name, thumb_url, price
+      let result = await addGoodsToCart(this.userInfo.id, goods.goods_id, goods.goods_name, goods.thumb_url, goods.price);
+      console.log(result);
+    }
   },
   computed:{
     ...mapState(['recommend'])

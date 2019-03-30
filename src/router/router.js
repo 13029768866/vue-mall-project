@@ -8,6 +8,7 @@ import Chat from './../pages/Chat/Chat'
 import Me from './../pages/Me/Me'
 import Register from './../pages/Login/Register'
 import Mesetting from './../pages/Me/MeSetting'
+import MeDetail from './../pages/Me/MeDetail'
 
 
 // 首页二级路由引入
@@ -83,9 +84,16 @@ export default new VueRouter({
     {
       path: '/login',
       component: Register
-    },{
+    },
+    //  设置
+    {
       path: '/setting',
       component: Mesetting
+    },
+    // 详情页面
+    {
+      path: '/detail',
+      component: MeDetail
     }
   ]
 })

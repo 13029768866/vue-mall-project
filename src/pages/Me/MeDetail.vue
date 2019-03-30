@@ -54,7 +54,7 @@
 </template>
 
 <script>
-  import moment from 'moment';
+  // import moment from 'moment';
   import {mapState} from 'vuex';
   import {changeUserInfo} from './../../api/index';
   import {Toast} from 'mint-ui';
@@ -86,12 +86,12 @@
       ...mapState(['userInfo'])
     },
     mounted(){
-        this.user_sign = this.userInfo.user_sign || '';
-        this.user_address = this.userInfo.user_address || '';
-        this.user_name = this.userInfo.user_name || '';
-        this.user_sex = this.userInfo.user_sex || '';
+        this.user_sign = this.userInfo.user_sign || '言念君子，温其如玉';
+        this.user_address = this.userInfo.user_address || '地球';
+        this.user_name = this.userInfo.user_name || '木剑游侠';
+        this.user_sex = this.userInfo.user_sex || '男';
         this.user_phone= this.userInfo.user_phone || '';
-        this.user_birthday= this.userInfo.user_birthday || '';
+        this.user_birthday= this.userInfo.user_birthday || '1994年7月3日';
     },
     methods: {
       // 1. 修改性别
@@ -102,31 +102,34 @@
 
       // 2. 修改日期
       handleBirthday(date){
-        // console.log(date);
-        console.log(moment(date).format("YYYY年MM月DD日"));
-        this.user_birthday = moment(date).format("YYYY年MM月DD日");
+        console.log(date);
+        // console.log(moment(date).format("YYYY年MM月DD日"));
+        // this.user_birthday = moment(date).format("YYYY年MM月DD日");
       },
 
       // 3. 修改用户信息
       async saveUserInfo(){
           // 3.1 请求接口
-          let result = await changeUserInfo(this.userInfo.id, this.user_name, this.user_sex, this.user_address, this.user_birthday, this.user_sign);
+          // let result = await changeUserInfo(this.userInfo.id, this.user_name, this.user_sex, this.user_address, this.user_birthday, this.user_sign);
          // console.log(result);
          // 3.2 提示用户
         Toast({
-           message: result.message,
+           message: '修改用户信息成功',
            position: 'bottom',
            duration: 2000
         });
+        setTimeout(()=>{
+          this.$router.replace('/me');
+        }, 2000)
         // 3.3 返回主界面
-        if(result.success_code === 200){
-            // 3.4 更新本地数据
-            this.$store.dispatch('getUserInfo');
-            // 3.5 返回主界面
-            setTimeout(()=>{
-               this.$router.replace('/me');
-            }, 2000)
-        }
+        // if(result.success_code === 200){
+        //     // 3.4 更新本地数据
+        //     this.$store.dispatch('getUserInfo');
+        //     // 3.5 返回主界面
+        //     setTimeout(()=>{
+        //        this.$router.replace('/me');
+        //     }, 2000)
+        // }
       }
     }
   }

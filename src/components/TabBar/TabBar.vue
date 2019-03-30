@@ -26,7 +26,7 @@
                    tag="li"
       >
         <img :src="$route.path.includes('/chat')?tabBarImgArr[3].selected:tabBarImgArr[3].normal" alt="">
-        <span>聊天</span>
+        <span>购物车</span>
       </router-link>
       <router-link class="tab-item"
                    to="/me"
