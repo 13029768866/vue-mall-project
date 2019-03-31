@@ -6,3 +6,4 @@ export const RECOMMEND = 'recommend' //  推荐页面
 export const SEARCH_GOODS = 'searchgoods' //  搜索页面
 export const USER_INFO = 'user_info' //  用户信息
 export const RESET_USER_INFO = 'reset_user_info'; // 清空用户信息
+export const CART_GOODS_LIST = 'cart_goods_list'; // 购物车数据

@@ -59,7 +59,7 @@
         </div>
       </div>
     </div>
-    <select-login v-else/>
+    <register v-else/>
   </div>
 </template>
 
@@ -69,13 +69,13 @@
 
   export default {
     name: "Chat",
-    // computed: {
-    //   ...mapState(['userInfo', 'cartgoods']),
-    // },
-    // mounted() {
-    //   // 请求商品数据
-    //   this.$store.dispatch('reqCartsGoods');
-    // },
+    computed: {
+      ...mapState(['userInfo', 'cartgoods']),
+    },
+    mounted() {
+      // 请求商品数据
+      this.$store.dispatch('reqCartsGoods');
+    },
     components: {
       Register
     }

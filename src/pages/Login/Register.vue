@@ -71,7 +71,7 @@
                   <img
                     ref="verifyImg"
                     class="get_verification"
-                    src="http://localhost:3000/api/captcha"
+                    src="http://154.83.12.64:3000/api/captcha"
                     @click.prevent = 'changeVerify()'
                     alt="captcha">
                 </section>
@@ -149,7 +149,7 @@
           },
           // 改变验证码
           changeVerify(){
-            this.$refs.verifyImg.src ='http://localhost:3000/api/captcha?time=' + new Date()
+            this.$refs.verifyImg.src ='http://154.83.12.64:3000/api/captcha?time=' + new Date()
           },
           // 登录
           async login() {

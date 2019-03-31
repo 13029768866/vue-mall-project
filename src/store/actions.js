@@ -6,7 +6,8 @@ import {
   getRecommend,
   getSearchGoods,
   getUserInfo,
-  getLogout
+  getLogout,
+  getCartsGoods
 } from '../api'
 
 //  引入mutations-types常量
@@ -17,7 +18,8 @@ import {
   RECOMMEND,
   SEARCH_GOODS,
   USER_INFO,
-  RESET_USER_INFO
+  RESET_USER_INFO,
+  CART_GOODS_LIST
 } from './mutation-types'
 
 export default {
@@ -68,6 +70,12 @@ export default {
     if(result.success_code === 200){
       commit(RESET_USER_INFO);
     }
+  },
+  // 9. 请求购物车数据
+  async reqCartsGoods({commit}) {
+    const result = await getCartsGoods();
+    if(result.success_code === 200){
+      commit(CART_GOODS_LIST, {cartgoods: result.message})
+    }
   }
-
 }

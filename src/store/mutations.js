@@ -6,7 +6,8 @@ import {
   RECOMMEND,
   SEARCH_GOODS,
   USER_INFO,
-  RESET_USER_INFO
+  RESET_USER_INFO,
+  CART_GOODS_LIST
 } from './mutation-types'
 
 // 根据常量提交到state
@@ -32,4 +33,7 @@ export default {
   [RESET_USER_INFO](state) {
     state.userInfo = {};
   },
+  [CART_GOODS_LIST](state, {cartgoods}) {
+    state.cartgoods = cartgoods;
+  }
 }

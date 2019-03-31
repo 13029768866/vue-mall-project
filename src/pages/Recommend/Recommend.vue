@@ -29,6 +29,9 @@ export default {
       count: 20
     }
   },
+  computed:{
+    ...mapState(['recommend','userInfo'])
+  },
   mounted() {
     console.log(Indicator);
     Indicator.open('正在加载中');
@@ -63,15 +66,16 @@ export default {
       },
       // 商品点击
     async dealWithCellBtnClick(goods){
+      console.log(goods);
       // 1. 发送请求
       // user_id, goods_id, goods_name, thumb_url, price
+      // console.log(this.userInfo.id);
+
       let result = await addGoodsToCart(this.userInfo.id, goods.goods_id, goods.goods_name, goods.thumb_url, goods.price);
       console.log(result);
     }
   },
-  computed:{
-    ...mapState(['recommend'])
-  },
+
   watch:{
     recommend(){
       this.$nextTick(()=>{
